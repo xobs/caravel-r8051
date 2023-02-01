@@ -7,6 +7,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  MPW_TAG: gfmpw-0f
+  USER_ID: 00000001
+
 jobs:
   pdk:
     runs-on: ubuntu-latest
@@ -143,3 +147,17 @@ jobs:
       #     make verify-la_test2-gl 
       #     make verify-mprj_stimulus-gl 
       #     make verify-wb_port-gl
+
+      - name: tapeout
+        run: |
+          make set_user_id
+          make gpio_defaults
+          make ship
+
+      - name: upload final gds
+        uses: actions/upload-artifact@v2
+        with:
+          name: gds
+          path: |
+            /home/runner/work/caravel_user_project/caravel_user_project/gds/*
+          
