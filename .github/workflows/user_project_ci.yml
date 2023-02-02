@@ -162,7 +162,8 @@ jobs:
       - name: setup miniconda
         uses: conda-incubator/setup-miniconda@v2.2.0
         with:
-          activate-environment: caravel-user-project
+          auto-activate-base: true
+          activate-environment: ""
           channel-priority: strict
           use-only-tar-bz2: true
 
