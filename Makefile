@@ -14,7 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 export SHELL=/bin/bash
-export .SHELLFLAGS=-el
+export .SHELLFLAGS=-elc
 
 MAKEFLAGS+=--warn-undefined-variables
 
