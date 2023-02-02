@@ -21,6 +21,29 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: cache conda
+        uses: actions/cache@v3
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-${{ env.CACHE_KEY }}-conda-${{ hashFiles('environment.yml') }}
+
+      - name: setup miniconda
+        uses: conda-incubator/setup-miniconda@v2.2.0
+        with:
+          activate-environment: conda-eda
+          channel-priority: strict
+          use-only-tar-bz2: true
+
+      - name: install magic
+        run: |
+          conda install -c litex-hub magic
+
+      - name: test magic
+        run: |
+          source $CONDA/envs/conda-eda
+          magic --version
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
@@ -152,27 +175,9 @@ jobs:
       #     make verify-mprj_stimulus-gl 
       #     make verify-wb_port-gl
 
-      - name: cache conda
-        uses: actions/cache@v3
-        with:
-          path: ~/conda_pkgs_dir
-          key:
-            ${{ runner.os }}-${{ env.CACHE_KEY }}-conda-${{ hashFiles('environment.yml') }}
-
-      - name: setup miniconda
-        uses: conda-incubator/setup-miniconda@v2.2.0
-        with:
-          auto-activate-base: true
-          activate-environment: ""
-          channel-priority: strict
-          use-only-tar-bz2: true
-
-      - name: install magic
-        run: |
-          conda install -c litex-hub magic
-
       - name: tapeout
         run: |
+          source $CONDA/envs/conda-eda
           make set_user_id
           make gpio_defaults
           make ship
