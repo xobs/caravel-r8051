@@ -13,6 +13,9 @@
 # limitations under the License.
 #
 # SPDX-License-Identifier: Apache-2.0
+export SHELL=/bin/bash
+export .SHELLFLAGS=-el
+
 MAKEFLAGS+=--warn-undefined-variables
 
 export CARAVEL_ROOT?=$(PWD)/caravel
