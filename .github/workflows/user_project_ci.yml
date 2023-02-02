@@ -10,10 +10,14 @@ on:
 env:
   MPW_TAG: gfmpw-0f
   USER_ID: 00000001
+  CACHE_KEY: 0
 
 jobs:
   pdk:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
       - uses: actions/checkout@v2
 
@@ -148,6 +152,24 @@ jobs:
       #     make verify-mprj_stimulus-gl 
       #     make verify-wb_port-gl
 
+      - name: cache conda
+        uses: actions/cache@v3
+        with:
+          path: ~/conda_pkgs_dir
+          key:
+            ${{ runner.os }}-${{ env.CACHE_KEY }}-conda-${{ hashFiles('environment.yml') }}
+
+      - name: setup miniconda
+        uses: conda-incubator/setup-miniconda@v2.2.0
+        with:
+          activate-environment: caravel-user-project
+          channel-priority: strict
+          use-only-tar-bz2: true
+
+      - name: install magic
+        run: |
+          conda install -c litex-hub magic
+
       - name: tapeout
         run: |
           make set_user_id
@@ -160,4 +182,3 @@ jobs:
           name: gds
           path: |
             /home/runner/work/caravel_user_project/caravel_user_project/gds/*
-          
