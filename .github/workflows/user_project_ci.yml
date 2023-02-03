@@ -19,7 +19,8 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout repo
+        uses: actions/checkout@v3
 
       - name: cache conda
         uses: actions/cache@v3
@@ -37,7 +38,7 @@ jobs:
           channel-priority: strict
           use-only-tar-bz2: true
 
-      - name: update path
+      - name: setup env
         run: |
           echo $CONDA/bin >> $GITHUB_PATH
           echo "PDK_ROOT=$CONDA/share/pdk" >> $GITHUB_ENV
@@ -51,7 +52,7 @@ jobs:
           netgen --version
           klayout -v
       
-      - name: Harden using Openlane
+      - name: run flow
         run: |
           make user_proj_example
           make user_project_wrapper
@@ -61,13 +62,13 @@ jobs:
           make precheck
           make run-precheck
 
-      - name: tapeout
+      - name: run tapeout
         run: |
           make set_user_id
           make gpio_defaults
           make ship
 
-      - name: upload final gds
+      - name: archive gds
         uses: actions/upload-artifact@v2
         with:
           name: gds
