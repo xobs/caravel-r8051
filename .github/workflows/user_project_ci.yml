@@ -46,6 +46,10 @@ jobs:
           echo $CONDA/bin >> $GITHUB_PATH
           echo "PDK_ROOT=$CONDA/share/pdk" >> $GITHUB_ENV
 
+      - name: fix openlane env
+        run: |
+          sed -i -e 's/sky130_fd_sc_hd/gf180mcu_fd_sc_mcu7t5v0/' $CONDA/share/openlane/install/env.tcl
+
       - name: test tools
         run: |
           yosys --version
