@@ -13,7 +13,7 @@ env:
   CACHE_KEY: 0
 
 jobs:
-  pdk:
+  tapeout:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -41,7 +41,7 @@ jobs:
         run: |
           echo $CONDA/bin >> $GITHUB_PATH
           echo "PDK_ROOT=$CONDA/share/pdk" >> $GITHUB_ENV
-          echo "PDK=gf180mcuC >> $GITHUB_ENV          
+          echo "PDK=gf180mcuC" >> $GITHUB_ENV          
 
       - name: test tools
         run: |
