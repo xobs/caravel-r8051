@@ -1,0 +1,8 @@
+[submodule "caravel"]
+	path = caravel
+	url = https://github.com/proppy/caravel-gf180mcu
+	branch = fix-caravel-verilog
+[submodule "mgmt_core_wrapper"]
+	path = mgmt_core_wrapper
+	url = https://github.com/efabless/caravel_mgmt_soc_gf180mcu
+	branch = gfmpw-0d
