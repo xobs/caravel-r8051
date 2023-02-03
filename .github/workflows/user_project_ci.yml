@@ -41,7 +41,7 @@ jobs:
 
       - name: test magic
         run: |
-          source $CONDA/envs/conda-eda
+          source $CONDA/envs/conda-eda/bin/activate.sh
           magic --version
 
       - name: Set up QEMU
