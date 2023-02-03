@@ -26,7 +26,7 @@ jobs:
         with:
           path: ~/conda_pkgs_dir
           key:
-            ${{ runner.os }}-${{ env.CACHE_KEY }}-conda-${{ hashFiles('environment.yml') }}
+            ${{ runner.os }}-${{ env.CACHE_KEY }}-conda
 
       - name: setup miniconda
         uses: conda-incubator/setup-miniconda@v2.2.0
@@ -43,10 +43,13 @@ jobs:
           echo "PDK_ROOT=$CONDA/share/pdk" >> $GITHUB_ENV
           echo "PDK=gf180mcuC >> $GITHUB_ENV          
 
-      - name: test magic
+      - name: test tools
         run: |
-          magic --version
+          yosys --version
           openroad -version
+          magic --version
+          netgen --version
+          klayout -v
       
       - name: Harden using Openlane
         run: |
