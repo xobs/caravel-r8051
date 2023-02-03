@@ -36,6 +36,10 @@ jobs:
           channel-priority: strict
           use-only-tar-bz2: true
 
+      - name: update path
+        run: |
+          echo $CONDA/bin >> $GITHUB_PATH
+        
       - name: install magic
         run: |
           conda install -c litex-hub magic
