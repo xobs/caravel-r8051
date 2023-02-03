@@ -48,8 +48,8 @@ jobs:
         run: |
           yosys --version
           openroad -version
-          magic --version
-          netgen --version
+          magic -dnull -noconsole --version
+          netgen -batch quit
           klayout -zz -v
       
       - name: run flow
