@@ -55,8 +55,6 @@ else
 	flow.tcl -design $$(realpath ./$*) -save_path $$(realpath ..) -save -tag $(OPENLANE_RUN_TAG) -overwrite
 endif
 	@mkdir -p ../signoff/$*/
-	@cp ./$*/runs/$*/OPENLANE_VERSION ../signoff/$*/
-	@cp ./$*/runs/$*/PDK_SOURCES ../signoff/$*/
 	@cp ./$*/runs/$*/reports/*.csv ../signoff/$*/
 
 .PHONY: openlane
