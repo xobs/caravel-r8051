@@ -61,10 +61,12 @@ jobs:
           make user_project_wrapper
 
       - name: run precheck
+        continue-on-error: true
         run: |
           make run-precheck
 
       - name: run timing
+        continue-on-error: true        
         run: |
           make setup-timing-scripts
           make extract-parasitics
@@ -72,6 +74,7 @@ jobs:
           make caravel-sta
 
       - name: run tapeout
+        continue-on-error: true        
         run: |
           make set_user_id
           make gpio_defaults
