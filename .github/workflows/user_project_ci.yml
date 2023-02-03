@@ -11,6 +11,9 @@ env:
   MPW_TAG: gfmpw-0f
   USER_ID: 00000001
   CACHE_KEY: 0
+  PDK: gf180mcuC
+  STD_CELL_LIBRARY: gf180mcu_fd_sc_mcu7t5v0
+  STD_CELL_LIBRARY_OPT: gf180mcu_fd_sc_mcu7t5v0
 
 jobs:
   tapeout:
@@ -42,7 +45,6 @@ jobs:
         run: |
           echo $CONDA/bin >> $GITHUB_PATH
           echo "PDK_ROOT=$CONDA/share/pdk" >> $GITHUB_ENV
-          echo "PDK=gf180mcuC" >> $GITHUB_ENV          
 
       - name: test tools
         run: |
