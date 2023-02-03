@@ -37,7 +37,7 @@ jobs:
       - name: setup miniconda
         uses: conda-incubator/setup-miniconda@v2.2.0
         with:
-          installer-url: https://github.com/proppy/conda-eda/releases/download/v0.0-1428-gfec8fb9/digital.gf180mcuc-0-Linux-x86_64.sh
+          installer-url: https://github.com/proppy/conda-eda/releases/download/v0.0-1429-gad6ae78/digital.gf180mcuc-0-Linux-x86_64.sh
           auto-activate-base: true
           activate-environment: ""
           channel-priority: strict
@@ -47,10 +47,6 @@ jobs:
         run: |
           echo $CONDA/bin >> $GITHUB_PATH
           echo "PDK_ROOT=$CONDA/share/pdk" >> $GITHUB_ENV
-
-      - name: fix openlane env
-        run: |
-          sed -i -e 's/sky130_fd_sc_hd/gf180mcu_fd_sc_mcu7t5v0/' $CONDA/share/openlane/install/env.tcl
 
       - name: test tools
         run: |
