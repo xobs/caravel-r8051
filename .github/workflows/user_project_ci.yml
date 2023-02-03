@@ -46,7 +46,6 @@ jobs:
 
       - name: test magic
         run: |
-          source $CONDA/bin/activate.sh
           magic --version
 
       - name: Set up QEMU
