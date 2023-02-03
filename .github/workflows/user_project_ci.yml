@@ -181,7 +181,6 @@ jobs:
 
       - name: tapeout
         run: |
-          source $CONDA/envs/conda-eda
           make set_user_id
           make gpio_defaults
           make ship
