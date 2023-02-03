@@ -50,7 +50,6 @@ jobs:
           openroad -version
           magic -dnull -noconsole --version
           netgen -batch quit
-          klayout -zz -v
       
       - name: run flow
         run: |
