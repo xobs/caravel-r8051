@@ -9,3 +9,6 @@
 [submodule "timing-scripts"]
 	path = timing-scripts
 	url = https://github.com/efabless/timing-scripts.git
+[submodule "mpw_precheck"]
+	path = mpw_precheck
+	url = https://github.com/efabless/mpw_precheck

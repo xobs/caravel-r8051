@@ -62,7 +62,6 @@ jobs:
 
       - name: run precheck
         run: |
-          make precheck
           make run-precheck
 
       - name: run timing
