@@ -63,15 +63,13 @@ list:
 $(designs) : export current_design=$@
 $(designs) : % : ./%/config.tcl
 ifneq (,$(wildcard ./$(current_design)/interactive.tcl))
-	$(docker_run) \
-		$(OPENLANE_IMAGE_NAME) sh -c $(openlane_cmd_interactive)
+	$(openlane_cmd_interactive)
 else
 	# $(current_design)
 	mkdir -p ./$*/runs/$(OPENLANE_RUN_TAG) 
 	rm -rf ./$*/runs/$*
 	ln -s $$(realpath ./$*/runs/$(OPENLANE_RUN_TAG)) ./$*/runs/$*
-	$(docker_run) \
-		$(OPENLANE_IMAGE_NAME) sh -c $(openlane_cmd)
+	$(openlane_cmd)
 endif
 	@mkdir -p ../signoff/$*/
 	@cp ./$*/runs/$*/OPENLANE_VERSION ../signoff/$*/
