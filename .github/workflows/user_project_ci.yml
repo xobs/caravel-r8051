@@ -31,7 +31,8 @@ jobs:
       - name: setup miniconda
         uses: conda-incubator/setup-miniconda@v2.2.0
         with:
-          activate-environment: conda-eda
+          auto-activate-base: true
+          activate-environment: ""
           channel-priority: strict
           use-only-tar-bz2: true
 
@@ -41,7 +42,7 @@ jobs:
 
       - name: test magic
         run: |
-          source $CONDA/envs/conda-eda/bin/activate.sh
+          source $CONDA/bin/activate.sh
           magic --version
 
       - name: Set up QEMU
