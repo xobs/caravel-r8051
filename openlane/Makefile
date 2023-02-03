@@ -21,16 +21,6 @@ OPENLANE_IMAGE_NAME ?= efabless/openlane:$(OPENLANE_TAG)
 designs = $(shell find * -maxdepth 0 -type d)
 current_design = null
 
-openlane_cmd = \
-	"flow.tcl \
-	-design $$(realpath ./$*) \
-	-save_path $$(realpath ..) \
-	-save \
-	-tag $(OPENLANE_RUN_TAG) \
-	-overwrite \
-	-ignore_mismatches"
-openlane_cmd_interactive = "flow.tcl -it -file $$(realpath ./$*/interactive.tcl)"
-
 docker_mounts = \
 	-v $$(realpath $(PWD)/..):$$(realpath $(PWD)/..) \
 	-v $(PDK_ROOT):$(PDK_ROOT) \
@@ -49,13 +39,6 @@ docker_env += -e MCW_ROOT=$(MCW_ROOT)
 docker_mounts += -v $(MCW_ROOT):$(MCW_ROOT)
 endif
 
-docker_startup_mode = $(shell test -t 0 && echo "-it" || echo "--rm" )
-docker_run = \
-	docker run $(docker_startup_mode) \
-	$(docker_mounts) \
-	$(docker_env) \
-	-u $(shell id -u $(USER)):$(shell id -g $(USER))
-
 list:
 	@echo $(designs)
 
@@ -63,13 +46,13 @@ list:
 $(designs) : export current_design=$@
 $(designs) : % : ./%/config.tcl
 ifneq (,$(wildcard ./$(current_design)/interactive.tcl))
-	$(openlane_cmd_interactive)
+	flow.tcl -it -file $$(realpath ./$*/interactive.tcl)
 else
 	# $(current_design)
 	mkdir -p ./$*/runs/$(OPENLANE_RUN_TAG) 
 	rm -rf ./$*/runs/$*
 	ln -s $$(realpath ./$*/runs/$(OPENLANE_RUN_TAG)) ./$*/runs/$*
-	$(openlane_cmd)
+	flow.tcl -design $$(realpath ./$*) -save_path $$(realpath ..) -save -tag $(OPENLANE_RUN_TAG) -overwrite
 endif
 	@mkdir -p ../signoff/$*/
 	@cp ./$*/runs/$*/OPENLANE_VERSION ../signoff/$*/
