@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
+        with:
+          submodules: true
 
       - name: cache conda
         uses: actions/cache@v3
@@ -66,6 +68,13 @@ jobs:
         run: |
           make precheck
           make run-precheck
+
+      - name: run timing
+        run: |
+          make setup-timing-scripts
+          make extract-parasitics
+          make create-spef-mapping
+          make caravel-sta
 
       - name: run tapeout
         run: |

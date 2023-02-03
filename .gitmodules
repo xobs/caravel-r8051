@@ -6,3 +6,6 @@
 	path = mgmt_core_wrapper
 	url = https://github.com/efabless/caravel_mgmt_soc_gf180mcu
 	branch = gfmpw-0d
+[submodule "timing-scripts"]
+	path = timing-scripts
+	url = https://github.com/efabless/timing-scripts.git
