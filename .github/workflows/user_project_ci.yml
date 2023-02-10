@@ -60,13 +60,30 @@ jobs:
           make user_proj_example
           make user_project_wrapper
 
+      - name: archive openlane runs
+        if: always()        
+        uses: actions/upload-artifact@v3
+        with:
+          name: openlane-runs
+          path: |
+            /home/runner/work/caravel_user_project/caravel_user_project/openlane/user_proj_example/runs/
+            /home/runner/work/caravel_user_project/caravel_user_project/openlane/user_project_wrapper/runs/
+            /home/runner/work/caravel_user_project/caravel_user_project/gds/
+
       - name: run precheck
-        continue-on-error: true
         run: |
+          python -m pip install -r requirements.mpw_precheck.txt
           make run-precheck
 
+      - name: archive precheck results
+        if: always()        
+        uses: actions/upload-artifact@v3
+        with:
+          name: precheck-results
+          path: |
+            /home/runner/work/caravel_user_project/precheck_results/
+
       - name: run timing
-        continue-on-error: true        
         run: |
           make setup-timing-scripts
           make extract-parasitics
@@ -74,15 +91,16 @@ jobs:
           make caravel-sta
 
       - name: run tapeout
-        continue-on-error: true        
         run: |
           make set_user_id
           make gpio_defaults
           make ship
 
-      - name: archive gds
-        uses: actions/upload-artifact@v2
+      - name: archive caravel tapeout
+        if: always()
+        uses: actions/upload-artifact@v3
         with:
-          name: gds
+          name: caravel tapeout
           path: |
-            /home/runner/work/caravel_user_project/caravel_user_project/gds/*
+            /home/runner/work/caravel_user_project/caravel_user_project/gds/caravel_*.gds
+            /home/runner/work/caravel_user_project/caravel_user_project/signoff/

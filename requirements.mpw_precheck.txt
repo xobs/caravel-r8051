@@ -1,0 +1,12 @@
+awscli
+boto3
+colorama
+coloredlogs
+klayout
+numpy
+PySpice
+pyverilog
+pyyaml
+requests
+strsimpy
+
