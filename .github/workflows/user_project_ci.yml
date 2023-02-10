@@ -37,7 +37,7 @@ jobs:
       - name: setup miniconda
         uses: conda-incubator/setup-miniconda@v2.2.0
         with:
-          installer-url: https://github.com/proppy/conda-eda/releases/download/v0.0-1429-gad6ae78/digital.gf180mcuc-0-Linux-x86_64.sh
+          installer-url: https://github.com/proppy/conda-eda/releases/download/v0.0-1435-g5285797/mixed-signal.gf180mcuc-0-Linux-x86_64.sh
           auto-activate-base: true
           activate-environment: ""
           channel-priority: strict
@@ -54,6 +54,7 @@ jobs:
           openroad -version
           magic -dnull -noconsole --version
           netgen -batch quit
+          klayout -zz -v
       
       - name: run flow
         run: |
