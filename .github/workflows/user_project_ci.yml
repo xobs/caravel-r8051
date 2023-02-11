@@ -82,7 +82,7 @@ jobs:
         with:
           name: precheck-results
           path: |
-            /home/runner/work/caravel_user_project/precheck_results/
+            /home/runner/work/caravel_user_project/caravel_user_project/precheck_results/
 
       - name: run timing
         run: |
