@@ -95,7 +95,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: caravel tapeout
+          name: caravel-tapeout
           path: |
             /home/runner/work/caravel_user_project/caravel_user_project/gds/caravel_*.gds
             /home/runner/work/caravel_user_project/caravel_user_project/signoff/
