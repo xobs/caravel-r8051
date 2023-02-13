@@ -9,7 +9,7 @@ on:
 
 env:
   MPW_TAG: gfmpw-0f
-  USER_ID: 00000001
+  USER_ID: '00000001'
   CACHE_KEY: 0
   PDK: gf180mcuC
   STD_CELL_LIBRARY: gf180mcu_fd_sc_mcu7t5v0
