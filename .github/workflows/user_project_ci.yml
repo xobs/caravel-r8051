@@ -85,6 +85,7 @@ jobs:
             /home/runner/work/caravel_user_project/caravel_user_project/precheck_results/
 
       - name: run timing
+        if: always()
         run: |
           make setup-timing-scripts
           make extract-parasitics
@@ -92,6 +93,7 @@ jobs:
           make caravel-sta
 
       - name: run tapeout
+        if: always()
         run: |
           make set_user_id
           make gpio_defaults
