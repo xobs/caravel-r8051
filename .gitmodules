@@ -4,9 +4,6 @@
 [submodule "mgmt_core_wrapper"]
 	path = mgmt_core_wrapper
 	url = https://github.com/efabless/caravel_mgmt_soc_gf180mcu
-[submodule "timing-scripts"]
-	path = timing-scripts
-	url = https://github.com/efabless/timing-scripts.git
 [submodule "mpw_precheck"]
 	path = mpw_precheck
-	url = https://github.com/efabless/mpw_precheck
+	url = https://github.com/proppy/mpw_precheck
