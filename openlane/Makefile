@@ -44,7 +44,7 @@ list:
 
 .PHONY: $(designs)
 $(designs) : export current_design=$@
-$(designs) : % : ./%/config.tcl
+$(designs) : % : ./%/config.json
 ifneq (,$(wildcard ./$(current_design)/interactive.tcl))
 	flow.tcl -it -file $$(realpath ./$*/interactive.tcl)
 else
